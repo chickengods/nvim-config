@@ -63,9 +63,9 @@ vim.opt.wildmode = { -- Better command-line completion
 vim.opt.lazyredraw = true -- Don't redraw during macros
 
 -- Backups
-vim.opt.backup = true
-vim.opt.writebackup = true
-vim.opt.swapfile = true
+-- vim.opt.backup = false
+-- vim.opt.writebackup = false
+-- vim.opt.swapfile = true
 
 -- Mouse
 vim.opt.mouse = 'a' -- Enable mouse in all modes
