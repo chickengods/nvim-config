@@ -34,13 +34,13 @@ vim.opt.splitright = true -- New vertical splits open to the right
 vim.opt.splitbelow = true -- New horizontal splits open below
 
 -- Editor Behavior
-vim.opt.shiftwidth = 2 -- Number of spaces for auto-indent
-vim.opt.softtabstop = 2 -- Number of spaces for <Tab> key
+-- vim.opt.shiftwidth = 2 -- Number of spaces for auto-indent
+-- vim.opt.softtabstop = 2 -- Number of spaces for <Tab> key
 vim.opt.scrolloff = 8 -- Keep 8 lines above/below cursor
 vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
 
 -- Search
-vim.opt.hlsearch = false -- Don't highlight search results
+vim.opt.hlsearch = true -- Don't highlight search results
 vim.opt.incsearch = true -- Incremental search
 
 -- Visual
