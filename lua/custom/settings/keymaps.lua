@@ -26,3 +26,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'leave insert mode' })
 vim.keymap.set('i', 'kj', '<Esc>', { desc = 'leave insert mode' })
+
+vim.keymap.set('v', '<Leader>y', '"+y', { desc = 'yank to clipboard' })
+vim.keymap.set('v', '<Leader>p', '"0p', { desc = 'paste from reg 0' })
