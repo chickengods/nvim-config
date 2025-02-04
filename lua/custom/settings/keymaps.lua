@@ -30,6 +30,34 @@ vim.keymap.set('i', 'kj', '<Esc>', { desc = 'leave insert mode' })
 vim.keymap.set('v', '<Leader>y', '"+y', { desc = 'yank to clipboard' })
 vim.keymap.set('v', '<Leader>p', '"0p', { desc = 'paste from reg 0' })
 
+-- custom function mapping
+local function go_test_file_toggle()
+  local file = vim.fn.expand '%:t'
+  local path = vim.fn.expand '%:p:h'
+
+  if not file:match '.go' then
+    print 'Not a go file'
+    return
+  end
+
+  if file:match '_test.go' then
+    file = file:gsub('_test.go', '.go')
+  else
+    file = file:gsub('.go', '_test.go')
+  end
+
+  local file_path = path .. '/' .. file
+  if vim.fn.filereadable(file_path) == 1 then
+    vim.cmd('e ' .. file_path)
+  else
+    print('Go test file not found:' .. file_path)
+  end
+end
+
+vim.keymap.set('n', '<leader>gt', function()
+  go_test_file_toggle()
+end, { noremap = true, silent = true, desc = 'Toggle test file' })
+
 -- gp.lua
 
 local function keymapOptions(desc)
