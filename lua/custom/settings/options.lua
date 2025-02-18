@@ -29,6 +29,9 @@ vim.opt.undofile = true -- Persistent undo history
 vim.opt.updatetime = 250 -- Faster update time for CursorHold events
 vim.opt.timeoutlen = 300 -- Time to wait for mapped sequences
 
+vim.opt.spell = true
+vim.opt.spelllang = 'en_us,en_gb'
+
 -- Window Management
 vim.opt.splitright = true -- New vertical splits open to the right
 vim.opt.splitbelow = true -- New horizontal splits open below

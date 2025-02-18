@@ -17,7 +17,7 @@ return {
         },
         googleai = {
           disable = false,
-          endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={{secret}}',
+          endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{secret}}',
           secret = os.getenv 'GOOGLEAI_API_KEY',
         },
       },
