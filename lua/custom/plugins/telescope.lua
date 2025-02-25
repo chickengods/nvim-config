@@ -66,6 +66,7 @@ return {
 
       -- bring in multi-grep
       require('custom.telescope.multigrep').setup()
+      require('custom.telescope.gogrep').setup()
     end,
   },
 }

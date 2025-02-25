@@ -46,6 +46,8 @@ vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
 vim.opt.hlsearch = true -- Don't highlight search results
 vim.opt.incsearch = true -- Incremental search
 
+vim.opt.modifiable = true
+
 -- Visual
 vim.opt.termguicolors = true -- Enable 24-bit RGB color
 vim.opt.wrap = false -- Don't wrap long lines
