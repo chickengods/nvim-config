@@ -31,6 +31,15 @@ local live_go_grep = function(opts)
       table.insert(args, '-g')
       table.insert(args, '!mock_*')
 
+      table.insert(args, '-g')
+      table.insert(args, '!*.connect.go')
+
+      table.insert(args, '-g')
+      table.insert(args, '!*.perms.go')
+
+      table.insert(args, '-g')
+      table.insert(args, '!*.inventory.go')
+
       ---@diagnostic disable-next-line: deprecated
       return vim.tbl_flatten {
         args,
