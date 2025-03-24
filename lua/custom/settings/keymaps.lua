@@ -29,7 +29,7 @@ vim.keymap.set('i', 'kj', '<Esc>', { desc = 'leave insert mode' })
 
 vim.keymap.set('v', '<Leader>y', '"+y', { desc = 'yank to clipboard' })
 vim.keymap.set('v', '<Leader>p', '"0p', { desc = 'paste from reg 0' })
-vim.keymap.set('n', '<Leader>p', '"0p', { desc = 'paste from reg 0' })
+vim.keymap.set('v', '<Leader>p', '"0p', { desc = 'paste from reg 0' })
 
 -- custom function mapping
 local function go_test_file_toggle()

@@ -32,6 +32,10 @@ vim.opt.timeoutlen = 300 -- Time to wait for mapped sequences
 vim.opt.spell = true
 vim.opt.spelllang = 'en_us,en_gb'
 
+vim.opt.autoread = true
+vim.opt.autowrite = true
+vim.opt.autowriteall = true
+
 -- Window Management
 vim.opt.splitright = true -- New vertical splits open to the right
 vim.opt.splitbelow = true -- New horizontal splits open below
