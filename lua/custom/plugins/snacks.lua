@@ -6,15 +6,21 @@ return {
   opts = {
     gitbrowse = {
       enabled = true,
-      url_patterns = {
-        ['github%.plaid%.com'] = {
-          branch = '/tree/{branch}',
-          file = '/blob/{branch}/{file}#L{line_start}-L{line_end}',
-          fileNoLines = '/blob/{branch}/{file}',
+      config = function(opts, defaults)
+        -- Add Plaid-specific remote patterns
+        table.insert(opts.remote_patterns, 1, { '^https://github%.plaid%.com/(.+)$', 'https://cs.plaid.io/%1' })
+        table.insert(opts.remote_patterns, 1, { '^git@github%.plaid%.com:(.+)%.git$', 'https://cs.plaid.io/%1' })
+        table.insert(opts.remote_patterns, 1, { '^git@github%.plaid%.com:(.+)$', 'https://cs.plaid.io/%1' })
+
+        -- Add Code Search URL patterns
+        opts.url_patterns['cs%.plaid%.io'] = {
+          branch = '/-/tree',
+          file = '/-/blob/{file}#L{line_start}-L{line_end}',
+          fileNoLines = '/-/blob/{file}',
           permalink = '/-/blob/{commit}/{file}#L{line_start}-L{line_end}',
-          commit = '/commit/{commit}',
-        },
-      },
+          commit = '/-/commit/{commit}',
+        }
+      end,
     },
   },
   keys = {
