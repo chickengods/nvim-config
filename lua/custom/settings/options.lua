@@ -78,3 +78,21 @@ vim.opt.lazyredraw = true -- Don't redraw during macros
 
 -- Mouse
 vim.opt.mouse = 'a' -- Enable mouse in all modes
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'typescript',
+  callback = function()
+    vim.opt_local.softtabstop = 2 -- Set tabstop for TypeScript files
+    vim.opt_local.shiftwidth = 2 -- Set shiftwidth for TypeScript files
+    vim.opt_local.expandtab = true -- Use spaces instead of tabs for TypeScript files
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'typescriptreact',
+  callback = function()
+    vim.opt_local.softtabstop = 2 -- Set tabstop for TypeScript files
+    vim.opt_local.shiftwidth = 2 -- Set shiftwidth for TypeScript files
+    vim.opt_local.expandtab = true -- Use spaces instead of tabs for TypeScript files
+  end,
+})
