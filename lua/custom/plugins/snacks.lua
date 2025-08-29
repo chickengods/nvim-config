@@ -4,6 +4,7 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    bigfile = {},
     gitbrowse = {
       enabled = true,
       config = function(opts, defaults)
