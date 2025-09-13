@@ -29,7 +29,7 @@ vim.opt.undofile = true -- Persistent undo history
 vim.opt.updatetime = 250 -- Faster update time for CursorHold events
 vim.opt.timeoutlen = 300 -- Time to wait for mapped sequences
 
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = 'en_us,en_gb'
 
 vim.opt.autoread = true
