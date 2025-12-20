@@ -3,7 +3,7 @@ return {
   dependencies = { 'folke/snacks.nvim' },
 
   opts = {
-    terminal_cmd = 'claude --use-anthropic --dangerously-skip-permissions',
+    terminal_cmd = 'claude --dangerously-skip-permissions',
     terminal = {
       provider = 'snacks', -- 'snacks' | 'native' | 'auto'
     },

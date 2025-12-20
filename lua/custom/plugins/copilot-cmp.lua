@@ -1,5 +1,5 @@
 return {
-  'zbirenbaum/copilot-cmp',
+  'zirenbaum/copilot-cmp',
   event = 'InsertEnter',
   config = function()
     require('copilot_cmp').setup()
