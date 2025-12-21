@@ -162,7 +162,9 @@ return {
       -- clangd = {},
       gopls = {},
       -- protols = {},
-      pyright = {},
+      -- Python LSP - Pyrefly is 10x faster than pyright
+      pyrefly = {},
+      -- pyright = {},  -- Replaced by pyrefly
       markdown_oxide = {},
 
       -- rust_analyzer = {},
@@ -214,8 +216,8 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
-      'black', -- Python formatter
-      'isort', -- Python import sorter
+      -- Python tooling (Ruff replaces black + isort + flake8 + pylint)
+      'ruff', -- All-in-one Python linter + formatter
       -- TypeScript/JavaScript tooling
       'prettierd', -- Fast Prettier formatter
       'prettier', -- Fallback formatter
