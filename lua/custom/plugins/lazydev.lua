@@ -8,5 +8,9 @@ return {
       -- Load luvit types when the `vim.uv` word is found
       { path = 'luvit-meta/library', words = { 'vim%.uv' } },
     },
+    integrations = {
+      -- Integrate with blink.cmp
+      blink = true,
+    },
   },
 }
