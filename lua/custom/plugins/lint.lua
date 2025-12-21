@@ -8,6 +8,7 @@ return {
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         python = { 'ruff' },
+        go = { 'golangcilint' },
         typescript = { 'eslint_d' },
         javascript = { 'eslint_d' },
         typescriptreact = { 'eslint_d' },

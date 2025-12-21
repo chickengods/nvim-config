@@ -33,6 +33,7 @@ return { -- Autoformat
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'ruff_format', 'ruff_organize_imports' },
+      go = { 'goimports', 'gofumpt' },
       -- TypeScript/JavaScript formatting
       typescript = { 'prettierd', 'prettier', stop_after_first = true },
       javascript = { 'prettierd', 'prettier', stop_after_first = true },

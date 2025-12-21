@@ -160,7 +160,28 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       -- clangd = {},
-      gopls = {},
+      gopls = {
+        settings = {
+          gopls = {
+            gofumpt = true, -- Use gofumpt for stricter formatting
+            staticcheck = true, -- Enable staticcheck analyzer
+            usePlaceholders = true, -- Better function completions
+            completeUnimported = true, -- Auto-import suggestions
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+          },
+        },
+      },
       -- protols = {},
       -- Python LSP - Pyrefly is 10x faster than pyright
       pyrefly = {},
@@ -218,6 +239,10 @@ return {
       'stylua', -- Used to format Lua code
       -- Python tooling (Ruff replaces black + isort + flake8 + pylint)
       'ruff', -- All-in-one Python linter + formatter
+      -- Go tooling
+      'gofumpt', -- Stricter gofmt
+      'goimports', -- Auto-import organizer
+      'golangci-lint', -- Meta-linter (includes staticcheck, go vet, etc.)
       -- TypeScript/JavaScript tooling
       'prettierd', -- Fast Prettier formatter
       'prettier', -- Fallback formatter
