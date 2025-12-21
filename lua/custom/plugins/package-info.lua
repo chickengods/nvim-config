@@ -1,7 +1,7 @@
 return {
   'vuki656/package-info.nvim',
   dependencies = { 'MunifTanjim/nui.nvim' },
-  event = 'BufRead package.json',
+  ft = 'json', -- Load on JSON files (plugin auto-detects package.json)
   config = function()
     require('package-info').setup {
       colors = {
@@ -15,7 +15,7 @@ return {
           outdated = '  ',
         },
       },
-      autostart = true,
+      autostart = true, -- Auto-show versions when package.json opens
       hide_up_to_date = false,
       hide_unstable_versions = false,
     }
