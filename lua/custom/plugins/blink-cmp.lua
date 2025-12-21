@@ -34,8 +34,17 @@ return {
         auto_show_delay_ms = 200,
       },
       ghost_text = {
-        enabled = false,
+        enabled = true,
       },
+    },
+
+    -- Frecency and proximity-based sorting
+    fuzzy = {
+      frecency = {
+        enabled = true,
+        path = vim.fn.stdpath('state') .. '/blink/cmp/frecency.dat',
+      },
+      use_proximity = true, -- prioritize items closer to cursor
     },
 
     -- Default sources
