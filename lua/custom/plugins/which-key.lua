@@ -52,6 +52,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>o', group = '[O]pen' },
       { '<leader>z', group = 'Harpoon' },
       { '<leader>q', group = '[Q]uickfix' },
+      { '<leader>n', group = 'NPM/[N]ode' },
       { '<leader>y', group = 'Clipboard', mode = { 'v' } },
       { '<leader>p', group = 'Paste', mode = { 'v' } },
       { 'gc', group = 'Comment', mode = { 'n', 'v' } },

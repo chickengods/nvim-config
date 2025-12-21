@@ -175,6 +175,16 @@ return {
       ts_ls = {},
       --
 
+      -- JSON LSP with schemastore for auto-completion of JSON schemas
+      jsonls = {
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      },
+
       lua_ls = {
         -- cmd = { ... },
         -- filetypes = { ... },
@@ -206,6 +216,10 @@ return {
       'stylua', -- Used to format Lua code
       'black', -- Python formatter
       'isort', -- Python import sorter
+      -- TypeScript/JavaScript tooling
+      'prettierd', -- Fast Prettier formatter
+      'prettier', -- Fallback formatter
+      'eslint_d', -- Fast ESLint linter
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
