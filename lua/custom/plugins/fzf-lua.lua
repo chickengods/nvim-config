@@ -54,13 +54,24 @@ return {
 
     -- Search in current buffer
     vim.keymap.set('n', '<leader>/', function()
-      fzf.lgrep_curbuf {
+      -- Use blines for virtual buffers (Oil, etc), lgrep_curbuf for real files
+      local bufname = vim.api.nvim_buf_get_name(0)
+      local is_real_file = bufname ~= '' and vim.fn.filereadable(bufname) == 1
+
+      local opts = {
         winopts = {
           height = 0.40,
-          width = 1.0,
-          row = 1.0,
+          width = 0.80,
+          row = 0.50,
+          col = 0.50,
         },
       }
+
+      if is_real_file then
+        fzf.lgrep_curbuf(opts)
+      else
+        fzf.blines(opts)
+      end
     end, { desc = '[/] Fuzzily search in current buffer' })
 
     -- Live grep in open files
