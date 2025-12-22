@@ -5,9 +5,9 @@ return {
     {
       '<leader>rn',
       function()
-        return ':IncRename ' .. vim.fn.expand '<cword>'
+        local word = vim.fn.expand '<cword>'
+        vim.cmd('IncRename ' .. word)
       end,
-      expr = true,
       desc = 'Incremental rename',
     },
   },
