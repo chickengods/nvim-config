@@ -81,8 +81,15 @@ return {
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        --  NOTE: inc-rename.nvim handles this keymap if available
-        -- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        -- Use inc-rename if available, otherwise fall back to default LSP rename
+        local has_inc_rename, inc_rename = pcall(require, 'inc_rename')
+        if has_inc_rename then
+          vim.keymap.set('n', '<leader>rn', function()
+            return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand '<cword>'
+          end, { buffer = event.buf, desc = 'LSP: [R]e[n]ame', expr = true })
+        else
+          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        end
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
