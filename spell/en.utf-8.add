@@ -33,4 +33,7 @@ webview
 emailaddress
 IdentityCreationFailureMetadata
 exlcude/!
-supabase
+ID
+yyyy
+bson
+whitespace
