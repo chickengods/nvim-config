@@ -13,15 +13,15 @@ return {
       -- Disable LSP config since we're using nvim-lspconfig
       lsp_cfg = false,
       lsp_keymaps = false,
-      -- Enable features
+      -- Disable inlay hints here, gopls handles them
       lsp_inlay_hints = {
-        enable = true,
+        enable = false,
       },
       -- Test runner
       run_in_floaterm = true,
-      -- Formatter (use conform.nvim instead)
-      formatter = 'gofumpt',
-      linter = 'golangci-lint',
+      -- Disable formatter/linter, conform.nvim handles formatting
+      formatter = false,
+      linter = false,
     }
 
     -- Keymaps for go.nvim features

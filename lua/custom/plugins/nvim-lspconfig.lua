@@ -165,13 +165,45 @@ return {
         settings = {
           gopls = {
             gofumpt = true, -- Use gofumpt for stricter formatting
-            staticcheck = true, -- Enable staticcheck analyzer
+            staticcheck = false, -- Disabled: redundant with golangci-lint, adds overhead
             usePlaceholders = true, -- Better function completions
             completeUnimported = true, -- Auto-import suggestions
-            analyses = {
-              unusedparams = true,
-              shadow = true,
+
+            -- Plaid mono repo performance optimizations: exclude Bazel directories
+            directoryFilters = {
+              '-/private/var/tmp/_bazel_' .. (os.getenv 'USER' or ''),
+              '-bazel-bin',
+              '-bazel-out',
+              '-bazel-testlogs',
+              '-bazel-plaid-monorepo',
+              '-vendor',
+              '-third_party',
+              '-generated',
+              '-testdata',
+              '-lib/zoom',
+              '-**/node_modules',
+              '-tmp',
+              '-build',
+              '-external',
+              '-resources',
+              '-venv',
+              '-node',
             },
+
+            -- Disable expensive analyses for CPU reduction in large repos
+            analyses = {
+              unusedparams = false,
+              unreachable = false,
+              nilness = false,
+              shadow = false,
+            },
+
+            -- Import formatting for Plaid monorepo
+            ['formatting.local'] = 'github.plaid.com/plaid/go.git',
+
+            -- Keep workspace focused to reduce work
+            expandWorkspaceToModule = false,
+
             hints = {
               assignVariableTypes = true,
               compositeLiteralFields = true,
@@ -182,11 +214,15 @@ return {
             },
           },
         },
+        -- Bazel integration for Plaid monorepo
+        env = {
+          GOPACKAGESDRIVER = vim.fn.expand '~/plaid/go.git/.cursor/tools/gopackagesdriver.sh',
+          GOMOD = 'go.mod',
+        },
       },
       -- protols = {},
-      -- Python LSP - Pyrefly is 10x faster than pyright
-      pyrefly = {},
-      -- pyright = {},  -- Replaced by pyrefly
+      -- Python LSP
+      pyright = {},
       markdown_oxide = {},
 
       -- rust_analyzer = {},
@@ -252,7 +288,8 @@ return {
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
-      ensure_installed = vim.tbl_keys(servers or {}),
+      -- Note: ensure_installed is handled by mason-tool-installer above
+      -- to avoid race conditions where both try to install the same packages
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}

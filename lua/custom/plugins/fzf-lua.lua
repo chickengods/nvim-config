@@ -20,6 +20,10 @@ return {
           flip_columns = 120,
         },
       },
+      -- LSP settings: async mode for large monorepos (results stream in as found)
+      lsp = {
+        async_or_timeout = true,
+      },
       -- Enable glob separator for multi-grep functionality
       -- Usage: "search_term -- *.go *.lua" to search in specific file types
       grep = {

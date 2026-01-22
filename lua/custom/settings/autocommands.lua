@@ -27,3 +27,11 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
   command = "if mode() != 'c' | checktime | endif",
   pattern = '*',
 })
+
+-- Auto-enter insert mode when switching to terminal buffers
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = 'term://*',
+  callback = function()
+    vim.cmd('startinsert')
+  end,
+})
