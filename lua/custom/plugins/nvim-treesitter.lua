@@ -64,10 +64,10 @@ return { -- Highlight, edit, and navigate code
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>a'] = '@parameter.inner',
+          -- ['<leader>a'] = '@parameter.inner', -- Disabled to avoid conflict with Claude Code
         },
         swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
+          -- ['<leader>A'] = '@parameter.inner', -- Disabled to avoid conflict with Claude Code
         },
       },
     },

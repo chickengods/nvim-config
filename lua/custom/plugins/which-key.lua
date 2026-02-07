@@ -62,8 +62,8 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>q', group = '[Q]uickfix' },
       { '<leader>x', group = 'Trouble/Diagnostics' },
       { '<leader>n', group = 'NPM/[N]ode' },
-      { '<leader>a', desc = 'Swap next parameter' },
-      { '<leader>A', desc = 'Swap previous parameter' },
+      -- { '<leader>a', desc = 'Swap next parameter' }, -- Disabled to avoid conflict with Claude Code
+      -- { '<leader>A', desc = 'Swap previous parameter' }, -- Disabled to avoid conflict with Claude Code
       { '<leader>y', group = 'Clipboard', mode = { 'v' } },
       { '<leader>p', group = 'Paste', mode = { 'v' } },
       { '<leader>9', group = '[9]9 AI' },

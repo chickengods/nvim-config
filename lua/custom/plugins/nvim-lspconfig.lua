@@ -182,6 +182,7 @@ return {
               '-testdata',
               '-lib/zoom',
               '-**/node_modules',
+              '-node_modules',
               '-tmp',
               '-build',
               '-external',
