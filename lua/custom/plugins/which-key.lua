@@ -66,6 +66,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>A', desc = 'Swap previous parameter' },
       { '<leader>y', group = 'Clipboard', mode = { 'v' } },
       { '<leader>p', group = 'Paste', mode = { 'v' } },
+      { '<leader>9', group = '[9]9 AI' },
       { 'gc', group = 'Comment', mode = { 'n', 'v' } },
     },
   },
