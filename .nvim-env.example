@@ -1,0 +1,2 @@
+# Set one of: work | personal
+NVIM_ENV=personal
