@@ -34,7 +34,7 @@ local check_external_reqs = function()
 end
 
 local check_ai_backend = function()
-  local env = require 'custom.env'
+  local env = require 'custom/env'
   local backend = env.is_work() and 'Claude Code' or 'OpenCode'
   local cli = env.is_work() and 'claude' or 'opencode'
 

@@ -13,7 +13,7 @@ return {
   'nickjvandyke/opencode.nvim',
   event = 'VeryLazy',
   enabled = function()
-    return require('custom.env').is_personal()
+    return require('custom/env').is_personal()
   end,
   dependencies = {
     {

@@ -3,7 +3,7 @@ return {
   dependencies = { 'folke/snacks.nvim' },
   event = 'VeryLazy',
   enabled = function()
-    return require('custom.env').is_work()
+    return require('custom/env').is_work()
   end,
 
   opts = {
