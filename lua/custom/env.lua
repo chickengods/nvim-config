@@ -6,10 +6,39 @@ M.ENV_TYPE = {
   WORK = "work",
 }
 
+local function read_nvim_env_file()
+  local env_file = vim.fn.stdpath('config') .. '/.nvim-env'
+  local file = io.open(env_file, 'r')
+  if not file then
+    return nil
+  end
+
+  local value = nil
+  for line in file:lines() do
+    local trimmed = vim.trim(line)
+    if trimmed ~= '' and not trimmed:match '^#' then
+      local key, parsed = trimmed:match '^([%w_]+)%s*=%s*(.+)$'
+      if key == 'NVIM_ENV' and parsed and parsed ~= '' then
+        value = parsed
+        break
+      elseif not key then
+        value = trimmed
+        break
+      end
+    end
+  end
+
+  file:close()
+  return value
+end
+
 -- Detect environment (work vs personal)
 function M.setup()
-  -- Read the environment variable, default to "personal" if not set
-  M.env = vim.env.NVIM_ENV or M.ENV_TYPE.PERSONAL
+  -- Read environment selector in this order:
+  -- 1. Process environment variable (easy one-off override)
+  -- 2. Local config file in this repo (machine-specific default)
+  -- 3. Personal fallback
+  M.env = vim.env.NVIM_ENV or read_nvim_env_file() or M.ENV_TYPE.PERSONAL
 
   -- Validate that the environment is one of the allowed types
   local valid_env = false

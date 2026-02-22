@@ -33,6 +33,20 @@ local check_external_reqs = function()
   return true
 end
 
+local check_ai_backend = function()
+  local env = require 'custom.env'
+  local backend = env.is_work() and 'Claude Code' or 'OpenCode'
+  local cli = env.is_work() and 'claude' or 'opencode'
+
+  vim.health.info(string.format("AI backend: %s (NVIM_ENV=%s)", backend, vim.g.nvim_env or 'unknown'))
+
+  if vim.fn.executable(cli) == 1 then
+    vim.health.ok(string.format("Found AI executable: '%s'", cli))
+  else
+    vim.health.warn(string.format("Could not find AI executable for active backend: '%s'", cli))
+  end
+end
+
 return {
   check = function()
     vim.health.start 'kickstart.nvim'
@@ -48,5 +62,6 @@ return {
 
     check_version()
     check_external_reqs()
+    check_ai_backend()
   end,
 }
