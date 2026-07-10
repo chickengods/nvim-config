@@ -1,0 +1,10 @@
+brew "fzf"
+brew "git"
+brew "go"
+brew "lazygit"
+brew "neovim"
+brew "node"
+brew "ripgrep"
+brew "tmux"
+
+cask "ghostty"

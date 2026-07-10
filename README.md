@@ -1,21 +1,46 @@
-<details><summary> Linux and Mac </summary>
+# Portable development setup
+
+Reproducible macOS setup for Ghostty, Neovim, tmux, Go, and the command-line tools used by this Neovim configuration.
+
+## Install
 
 ```sh
-git clone https://github.com/chickengods/nvim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+curl -fsSL https://raw.githubusercontent.com/chickengods/nvim-config/master/install.sh | bash
 ```
 
-</details>
+The installer is idempotent on a clean checkout. An existing `~/.tmux.conf` is timestamped before replacement, and a modified or unexpected Neovim checkout is left untouched.
 
+Preview all commands without changing the machine:
 
-### FAQ
+```sh
+curl -fsSL https://raw.githubusercontent.com/chickengods/nvim-config/master/install.sh | bash -s -- --dry-run
+```
 
-* Wait did this config start from [kickstart](https://github.com/nvim-lua/kickstart.nvim)
-  * yes
+Test another branch:
 
-### Environment Selection
+```sh
+DEV_SETUP_BRANCH=my-branch bash install.sh --dry-run
+```
 
-This config can switch behavior by environment (`work` vs `personal`).
+## Installed tools
 
-1. Copy `.nvim-env.example` to `.nvim-env`.
-2. Set `NVIM_ENV=work` on your work machine and `NVIM_ENV=personal` on your personal machine.
-3. Optional one-off override: launch Neovim with `NVIM_ENV=work nvim`.
+- Homebrew and the packages in `Brewfile`
+- The latest stable Ghostty, plus Neovim, tmux, and TPM
+- Go and Node.js for configured language tooling
+- ripgrep, fzf, and lazygit for configured Neovim features
+
+## Neovim environment
+
+The default `.nvim-env` selects the portable `personal` configuration:
+
+```sh
+NVIM_ENV=personal
+```
+
+Override a single launch with `NVIM_ENV=work nvim` when a work-specific profile is available.
+
+## Repository layout
+
+- `init.lua` and `lua/custom/` — Neovim configuration
+- `.tmux.conf` — tmux configuration with current-directory windows and splits
+- `install.sh` and `Brewfile` — machine bootstrap
