@@ -1,6 +1,6 @@
 # Portable development setup
 
-Reproducible macOS setup for Ghostty, Neovim, tmux, zsh, and local agent workflows.
+Reproducible macOS setup for Ghostty, Neovim, tmux, Go, and the command-line tools used by this Neovim configuration.
 
 ## Install
 
@@ -8,7 +8,7 @@ Reproducible macOS setup for Ghostty, Neovim, tmux, zsh, and local agent workflo
 curl -fsSL https://raw.githubusercontent.com/chickengods/nvim-config/master/install.sh | bash
 ```
 
-The installer is idempotent on a clean checkout. Existing `~/.zshrc`, `~/.tmux.conf`, and agent files are timestamped before replacement. It stops instead of overwriting a modified Neovim checkout.
+The installer is idempotent on a clean checkout. An existing `~/.tmux.conf` is timestamped before replacement, and a modified or unexpected Neovim checkout is left untouched.
 
 Preview all commands without changing the machine:
 
@@ -25,15 +25,9 @@ DEV_SETUP_BRANCH=my-branch bash install.sh --dry-run
 ## Installed tools
 
 - Homebrew and the packages in `Brewfile`
-- Ghostty, Neovim, tmux, TPM, and Oh My Zsh
-- Go, Node.js, Deno, ripgrep, fzf, lazygit, direnv, and rbenv
-- Feature workflow skills, references, hooks, and `~/agent_docs/` directories
-
-The setup never copies API keys, tokens, machine-specific paths, or private project data. Authentication remains interactive:
-
-```sh
-gh auth login
-```
+- The latest stable Ghostty, plus Neovim, tmux, and TPM
+- Go and Node.js for configured language tooling
+- ripgrep, fzf, and lazygit for configured Neovim features
 
 ## Neovim environment
 
@@ -49,6 +43,4 @@ Override a single launch with `NVIM_ENV=work nvim` when a work-specific profile 
 
 - `init.lua` and `lua/custom/` — Neovim configuration
 - `.tmux.conf` — tmux configuration with current-directory windows and splits
-- `dotfiles/zshrc` — portable interactive shell configuration
-- `.claude/` — versioned agent workflow source
 - `install.sh` and `Brewfile` — machine bootstrap

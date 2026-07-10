@@ -1,17 +1,15 @@
-# Check Lua Formatting
-name: Check Lua Formatting
-on: pull_request_target
+name: Validate configuration
+
+on:
+  pull_request:
 
 jobs:
   stylua-check:
-    if: github.repository == 'nvim-lua/kickstart.nvim'
     name: Stylua Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+        uses: actions/checkout@v4
       - name: Stylua Check
         uses: JohnnyMorganz/stylua-action@v3
         with:
@@ -19,3 +17,16 @@ jobs:
           version: latest
           args: --check .
 
+  bootstrap-check:
+    name: Bootstrap Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install --yes shellcheck
+      - name: Validate bootstrap
+        run: |
+          bash -n install.sh
+          shellcheck install.sh
+          ruby -c Brewfile

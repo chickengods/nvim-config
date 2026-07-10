@@ -79,7 +79,10 @@ install_repo() {
   [[ -d "$nvim_dir/.git" ]] || fail "$nvim_dir exists and is not a Git checkout"
   [[ -z "$(git -C "$nvim_dir" status --porcelain)" ]] || fail "$nvim_dir has local changes"
 
-  local current_branch
+  local current_branch origin_url
+  origin_url="$(git -C "$nvim_dir" remote get-url origin)"
+  [[ "$origin_url" == "$repo_url" ]] || fail "$nvim_dir uses origin $origin_url, expected $repo_url"
+
   current_branch="$(git -C "$nvim_dir" branch --show-current)"
   [[ "$current_branch" == "$repo_branch" ]] || fail "$nvim_dir is on $current_branch, expected $repo_branch"
 
@@ -101,53 +104,13 @@ backup_and_link() {
   run ln -s "$source" "$target"
 }
 
-copy_entry() {
-  local source=$1
-  local target=$2
-
-  if [[ -e "$target" ]] && diff -qr "$source" "$target" >/dev/null 2>&1; then
-    return
-  fi
-
-  if [[ -e "$target" || -L "$target" ]]; then
-    run mv "$target" "$target.$backup_suffix"
-  fi
-
-  run cp -R "$source" "$target"
-}
-
-install_directory_entries() {
-  local source_dir=$1
-  local target_dir=$2
-  local entry
-
-  run mkdir -p "$target_dir"
-  for entry in "$source_dir"/*; do
-    copy_entry "$entry" "$target_dir/$(basename "$entry")"
-  done
-}
-
-install_shell_tools() {
-  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-    run git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
-  fi
-
+install_tmux() {
   if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
     run mkdir -p "$HOME/.tmux/plugins"
     run git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
   fi
 
-  backup_and_link "$nvim_dir/dotfiles/zshrc" "$HOME/.zshrc"
   backup_and_link "$nvim_dir/.tmux.conf" "$HOME/.tmux.conf"
-}
-
-install_agent_workflow() {
-  run mkdir -p "$HOME/agent_docs/active" "$HOME/agent_docs/finished" "$HOME/agent_docs/daily" "$HOME/agent_docs/state"
-  install_directory_entries "$nvim_dir/.claude/refs" "$HOME/.claude/refs"
-  install_directory_entries "$nvim_dir/.claude/scripts" "$HOME/.claude/scripts"
-  install_directory_entries "$nvim_dir/.claude/skills" "$HOME/.claude/skills"
-  copy_entry "$nvim_dir/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-  copy_entry "$nvim_dir/.claude/settings.json" "$HOME/.claude/settings.json"
 }
 
 verify_command() {
@@ -161,9 +124,9 @@ verify_command() {
 install_brew
 run brew install git
 install_repo
+run brew update
 run brew bundle --file "$nvim_dir/Brewfile"
-install_shell_tools
-install_agent_workflow
+install_tmux
 
 if [[ ! -e "$nvim_dir/.nvim-env" ]]; then
   run cp "$nvim_dir/.nvim-env.example" "$nvim_dir/.nvim-env"
@@ -172,9 +135,12 @@ fi
 run "$HOME/.tmux/plugins/tpm/bin/install_plugins"
 run nvim --headless '+Lazy! sync' +qa
 
-for command_name in brew git nvim tmux rg fzf jq gh direnv rbenv node go deno lazygit; do
+for command_name in brew git nvim tmux rg fzf node go lazygit; do
   verify_command "$command_name"
 done
 
-printf '\nSetup complete. Authenticate remaining tools with:\n'
-printf '  gh auth login\n'
+if ! "$dry_run"; then
+  brew list --cask ghostty >/dev/null 2>&1 || fail "Ghostty is not installed"
+fi
+
+printf '\nSetup complete.\n'
