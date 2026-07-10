@@ -150,14 +150,6 @@ install_agent_workflow() {
   copy_entry "$nvim_dir/.claude/settings.json" "$HOME/.claude/settings.json"
 }
 
-install_cursor() {
-  export PATH="$HOME/.local/bin:$PATH"
-  if command -v cursor-agent >/dev/null 2>&1; then
-    return
-  fi
-  run_shell 'curl https://cursor.com/install -fsS | bash'
-}
-
 verify_command() {
   local command_name=$1
   if "$dry_run"; then
@@ -172,7 +164,6 @@ install_repo
 run brew bundle --file "$nvim_dir/Brewfile"
 install_shell_tools
 install_agent_workflow
-install_cursor
 
 if [[ ! -e "$nvim_dir/.nvim-env" ]]; then
   run cp "$nvim_dir/.nvim-env.example" "$nvim_dir/.nvim-env"
@@ -181,10 +172,9 @@ fi
 run "$HOME/.tmux/plugins/tpm/bin/install_plugins"
 run nvim --headless '+Lazy! sync' +qa
 
-for command_name in brew git nvim tmux rg fzf jq gh direnv rbenv node go deno lazygit cursor-agent; do
+for command_name in brew git nvim tmux rg fzf jq gh direnv rbenv node go deno lazygit; do
   verify_command "$command_name"
 done
 
 printf '\nSetup complete. Authenticate remaining tools with:\n'
 printf '  gh auth login\n'
-printf '  cursor-agent login\n'

@@ -27,14 +27,12 @@ DEV_SETUP_BRANCH=my-branch bash install.sh --dry-run
 - Homebrew and the packages in `Brewfile`
 - Ghostty, Neovim, tmux, TPM, and Oh My Zsh
 - Go, Node.js, Deno, ripgrep, fzf, lazygit, direnv, and rbenv
-- Cursor CLI
 - Feature workflow skills, references, hooks, and `~/agent_docs/` directories
 
 The setup never copies API keys, tokens, machine-specific paths, or private project data. Authentication remains interactive:
 
 ```sh
 gh auth login
-cursor-agent login
 ```
 
 ## Neovim environment
