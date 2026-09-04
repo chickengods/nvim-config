@@ -31,11 +31,21 @@ return {
   end,
   keys = {
     { '<leader>a', nil, desc = 'AI/OpenCode' },
-    { '<leader>ac', opencode_call(function(opencode) opencode.toggle() end), desc = 'Toggle OpenCode' },
-    { '<leader>ar', opencode_call(function(opencode) opencode.command 'session.select' end), desc = 'Resume/Open session' },
-    { '<leader>aC', opencode_call(function(opencode) opencode.toggle() end), desc = 'Continue OpenCode' },
-    { '<leader>ab', opencode_call(function(opencode) opencode.ask('@buffer: ', { submit = false }) end), desc = 'Add current buffer' },
-    { '<leader>as', opencode_call(function(opencode) opencode.prompt '@this' end), mode = 'v', desc = 'Send to OpenCode' },
+    { '<leader>ac', opencode_call(function(opencode)
+      opencode.toggle()
+    end), desc = 'Toggle OpenCode' },
+    { '<leader>ar', opencode_call(function(opencode)
+      opencode.command 'session.select'
+    end), desc = 'Resume/Open session' },
+    { '<leader>aC', opencode_call(function(opencode)
+      opencode.toggle()
+    end), desc = 'Continue OpenCode' },
+    { '<leader>ab', opencode_call(function(opencode)
+      opencode.ask('@buffer: ', { submit = false })
+    end), desc = 'Add current buffer' },
+    { '<leader>as', opencode_call(function(opencode)
+      opencode.prompt '@this'
+    end), mode = 'v', desc = 'Send to OpenCode' },
     {
       '<leader>as',
       opencode_call(function(opencode)
@@ -49,8 +59,14 @@ return {
       desc = 'Add file',
       ft = { 'NvimTree', 'neo-tree', 'oil' },
     },
-    { '<leader>an', opencode_call(function(opencode) opencode.command 'session.new' end), desc = 'New OpenCode session' },
-    { '<leader>aS', opencode_call(function(opencode) opencode.command 'session.select' end), desc = 'Session picker' },
-    { '<leader>ax', opencode_call(function(opencode) opencode.stop() end), desc = 'Close OpenCode' },
+    { '<leader>an', opencode_call(function(opencode)
+      opencode.command 'session.new'
+    end), desc = 'New OpenCode session' },
+    { '<leader>aS', opencode_call(function(opencode)
+      opencode.command 'session.select'
+    end), desc = 'Session picker' },
+    { '<leader>ax', opencode_call(function(opencode)
+      opencode.stop()
+    end), desc = 'Close OpenCode' },
   },
 }

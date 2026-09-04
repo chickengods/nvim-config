@@ -38,7 +38,7 @@ local check_ai_backend = function()
   local backend = env.is_work() and 'Claude Code' or 'OpenCode'
   local cli = env.is_work() and 'claude' or 'opencode'
 
-  vim.health.info(string.format("AI backend: %s (NVIM_ENV=%s)", backend, vim.g.nvim_env or 'unknown'))
+  vim.health.info(string.format('AI backend: %s (NVIM_ENV=%s)', backend, vim.g.nvim_env or 'unknown'))
 
   if vim.fn.executable(cli) == 1 then
     vim.health.ok(string.format("Found AI executable: '%s'", cli))
