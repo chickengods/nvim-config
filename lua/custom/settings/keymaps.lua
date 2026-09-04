@@ -26,6 +26,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'leave insert mode' })
 vim.keymap.set('i', 'kj', '<Esc>', { desc = 'leave insert mode' })
+vim.keymap.set('v', 'jk', '<Esc>', { desc = 'leave visual mode' })
+vim.keymap.set('v', 'kj', '<Esc>', { desc = 'leave visual mode' })
 
 vim.keymap.set('v', '<Leader>y', '"+y', { desc = 'yank to clipboard' })
 vim.keymap.set('v', '<Leader>p', '"0p', { desc = 'paste from reg 0' })
@@ -75,3 +77,7 @@ vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]])
 vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
 vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
 vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
+
+-- scroll wheel scrolls Neovim's view of the terminal buffer, not the TUI inside it
+vim.keymap.set('t', '<ScrollWheelUp>', [[<C-\><C-n><ScrollWheelUp>]])
+vim.keymap.set('t', '<ScrollWheelDown>', [[<C-\><C-n><ScrollWheelDown>]])

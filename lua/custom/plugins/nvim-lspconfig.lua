@@ -162,12 +162,15 @@ return {
     local servers = {
       -- clangd = {},
       gopls = {
+        cmd = { 'gopls', '-remote=auto', '-remote.listen.timeout=30m' },
+        -- The -remote=auto socket path is derived from TMPDIR, which differs per worktree
+        -- shell. Pinning it makes every nvim instance share one daemon (and one package cache).
+        cmd_env = { TMPDIR = '/tmp' },
         settings = {
           gopls = {
             gofumpt = true, -- Use gofumpt for stricter formatting
             staticcheck = false, -- Disabled: redundant with golangci-lint, adds overhead
             usePlaceholders = true, -- Better function completions
-            completeUnimported = true, -- Auto-import suggestions
 
             -- Plaid mono repo performance optimizations: exclude Bazel directories
             directoryFilters = {
@@ -200,7 +203,7 @@ return {
             },
 
             -- Import formatting for Plaid monorepo
-            ['formatting.local'] = 'github.plaid.com/plaid/go.git',
+            ['local'] = 'github.plaid.com/plaid/go.git',
 
             -- Keep workspace focused to reduce work
             expandWorkspaceToModule = false,

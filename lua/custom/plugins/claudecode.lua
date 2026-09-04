@@ -7,7 +7,7 @@ return {
   end,
 
   opts = {
-    terminal_cmd = 'CLAUDE_REBUILD=true megabin claude --dangerously-skip-permissions',
+    terminal_cmd = 'CLAUDE_REBUILD=true CLAUDE_CODE_DISABLE_MOUSE=1 megabin claude --dangerously-skip-permissions',
     terminal = {
       provider = 'snacks', -- 'snacks' | 'native' | 'auto'
     },
